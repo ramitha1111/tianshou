@@ -1,3 +1,8 @@
+# Optimized by ci-cost (https://github.com/mariotavarez/ci-cost)
+# Applied 1 optimization:
+# - [MEDIUM] Add concurrency group to "lint_and_docs.yml"
+# Estimated savings: ~2 min/run
+#
 name: Check Formatting/Typing and Build Docs
 
 on:
@@ -15,6 +20,10 @@ on:
         required: false
         default: false
 
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   check:
     runs-on: ubuntu-latest
